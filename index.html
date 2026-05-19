@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İyi Ki Doğdun Sevgilim, İyi Ki Varsın Zeynep'im...</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #1a0b16;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            color: #fff;
+            position: relative;
+        }
+
+        /* Arkaplan Kalp Yağmuru */
+        .bg-heart {
+            position: absolute;
+            color: rgba(255, 75, 110, 0.2);
+            animation: floatUp 6s linear infinite;
+            font-size: 20px;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        .container {
+            width: 90%;
+            max-width: 650px;
+            text-align: center;
+            z-index: 10;
+            padding: 20px;
+        }
+
+        /* Dokunmatik Hediye Kutusu */
+        .gift-box {
+            width: 150px;
+            height: 150px;
+            background: #ff4b6e;
+            margin: 0 auto 30px;
+            position: relative;
+            cursor: pointer;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(255, 75, 110, 0.4);
+            transition: transform 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .gift-box:hover { transform: scale(1.05); }
+        .gift-box::before { content: ''; position: absolute; width: 30px; height: 100%; background: #ffe6eb; }
+        .gift-box::after { content: ''; position: absolute; width: 100%; height: 30px; background: #ffe6eb; }
+
+        .gift-text {
+            position: absolute;
+            z-index: 5;
+            color: #ff4b6e;
+            font-weight: bold;
+            font-size: 14px;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            pointer-events: none;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #ff4b6e;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(255, 75, 110, 0.6);
+            display: none;
+        }
+
+        /* Mektup Alanı */
+        .letter-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 75, 110, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: left;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            display: none;
+            max-height: 65vh;
+            overflow-y: auto;
+            animation: fadeIn 1.5s ease forwards;
+        }
+
+        /* Yazıların dökülme efekti */
+        .paragraph {
+            margin-bottom: 25px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 1.2s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slideUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Dokunulduğunda fırlayan kalpler */
+        .click-heart {
+            position: absolute;
+            color: #ff4b6e;
+            font-size: 24px;
+            pointer-events: none;
+            animation: burst 1s ease-out forwards;
+            z-index: 100;
+        }
+
+        @keyframes burst {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+        }
+
+        .letter-card::-webkit-scrollbar { width: 6px; }
+        .letter-card::-webkit-scrollbar-thumb { background: #ff4b6e; border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <!-- Arka Planda Çalacak Müzik -->
+    <audio id="bgMusic" loop>
+        <source src="sarki.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <div class="gift-box" id="giftBox" onclick="openGift(event)">
+            <span class="gift-text">Tıkla Sevgilim ❤️</span>
+        </div>
+
+        <h1 id="mainTitle">İyi Ki Doğdun Zeynep'im! 🎂❤️</h1>
+
+        <!-- İçinden çıkacak aşırı uzun aşk mektubu -->
+        <div class="letter-card" id="letterCard">
+            
+            <div class="paragraph" style="animation-delay: 0.5s;">
+                <strong>Benim Canım Sevgilim, Ömrümün En Güzel Rengi, Dünyadaki En Büyük Şansım Zeynep'im...</strong><br>
+                Bugün takvimlerin gösterdiği en sıradan gün bile senin doğumunla birlikte benim için yılın en kutsal, en özel günü haline geliyor. İyi ki doğdun, iyi ki bu dünyaya adım attın ve iyi ki yollarımız bir yerlerde kesişip beni dünyanın en mutlu insanı yaptı. Seni canımdan çok, aldığım her nefesten, kalbimin her bir çırpınışından daha çok seviyorum sevgilim. Sen benim sadece sevgilim değil; sol yanım, sığınağım, geleceğim ve hayatımın ta kendisisin.
+            </div>
+            
+            <div class="paragraph" style="animation-delay: 2s;">
+                Sana olan sevgimi, hissettiklerimi kelimelere dökmek o kadar zor ki... Bazen yanındayken, gözlerinin içine bakarken içimde öyle bir aşk büyüyor ki göğüs kafesime sığmıyor gibi hissediyorum. Gözlerinin derinliklerindeki o huzuru dünyadaki hiçbir hazineye, hiçbir parıltıya değişmem. Sen benim hayatıma girdiğin andan itibaren karanlıkta kalan ne varsa aydınlandı, eksik olan ne varsa tamamlandı. Seninle birlikte ben, kendimi yeniden buldum, sevmeyi ve gerçekten değer görmeyi öğrendim.
+            </div>
+
+            <div class="paragraph" style="animation-delay: 3.5s;">
+                İnsan hayatta bir kez gerçekten aşık olur derler ya, ben her sabah seninle yeni bir güne uyanırken, sana her saniye yeniden aşık oluyorum. Attığın küçücük bir mesaj, sesindeki o tatlı tını, yüzündeki ufacık bir tebessüm benim dünyadaki tüm dertlerimi, yorgunluklarımı silip atmaya yetiyor. Sen benim en güzel sakinleştiricim, en büyük motivasyon kaynağımsın. Şu koca dünyada her şey değişse, her şey ters gitse bile senin elimi tuttuğunu bilmek bana her zorlukla savaşacak o deli gücü veriyor.
+            </div>
+
+            <div class="paragraph" style="animation-delay: 5s;">
+                Biz seninle sadece güzel günleri değil; hayatın getirdiği her anı paylaşmak için yola çıktık. Seninle gülmeyi, seninle saçmalamayı, seninle sessizce oturmayı bile dünyadaki her şeye tercih ederim. Geleceğe dair kurduğum her hayalin, yürüyeceğim her yolun, varacağım her hedefimin tam merkezinde sen varsın Zeynep'im. Seninle birlikte yaşlanmak, yıllar sonra bile bugünkü gibi gözlerinin içine bakıp "İyi ki benim olmuşsun" diyebilmek benim bu hayattaki en büyük duam.
+            </div>
+
+            <div class="paragraph" style="animation-delay: 6.5s;">
+                Bu ekran, bu kodlar, bu küçük sayfadaki her bir satır sana olan hislerimin milyonda birini bile anlatamaz belki... Ama bilmeni istedim ki, sana olan aşkımı anlatmaya ne kelimeler yeter ne de sayfalar. Ben seni sadece bugün değil, ömrümün yettiği her saniye, kalbimin son kez çarpacağı o ana kadar aynı tutkuyla, aynı sadakatle ve her gün katlanarak büyüyen bir aşkla seveceğim. Sen benim bu hayatta tutunduğum en sağlam dalsın, başımı huzurla yasladığım tek limansın.
+            </div>
+
+            <div class="paragraph" style="animation-delay: 8s;">
+                Yeni yaşında, önümüzdeki tüm yıllarda ve ömrümüzün sonuna kadar ellerimiz birbirine daha da sıkı kenetlensin sevgilim. Hayat sana kalbinin o eşsiz güzelliği gibi temiz, neşeli, huzurlu ve başarı dolu günler getirsin. Yüzündeki o muazzam gülüş hiçbir zaman eksilmesin, çünkü sen güldüğünde benim içimdeki bütün dünyalar çiçek açıyor. Ne olursa olsun, ne yaşanırsa yaşansın, ben her zaman senin tam yanında, senin en büyük destekçin ve seni canından çok seven erkeğin olarak kalacağım. 
+            </div>
+
+            <div class="paragraph" style="animation-delay: 9.5s;">
+                Doğum günün kutlu olsun kalbimin tek sahibi, ömrümün en güzel Zeynep'i... İyi ki doğdun, iyi ki benim her şeyim oldun. Yeni yaşımız bize hep mutluluk, hep aşk ve birbirimizle dopdolu hatıralar getirsin. Seni kelimelerin yetmeyeceği kadar, evrendeki tüm yıldızların toplamı kadar çok ama çok seviyorum. Doğum günün kutlu olsun sevgilim! ❤️✨🎂
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Arkaplan Kalp Yağmuru
+        function createBgHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('bg-heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+            heart.style.fontSize = Math.random() * 15 + 15 + 'px';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+        setInterval(createBgHeart, 300);
+
+        // Dokunulduğunda fırlayan kalpler
+        document.body.addEventListener('click', (e) => {
+            for(let i=0; i<8; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('click-heart');
+                heart.innerHTML = ['❤️','💖','💝','💕','✨'][Math.floor(Math.random()*5)];
+                heart.style.left = e.clientX + 'px';
+                heart.style.top = e.clientY + 'px';
+                
+                const tx = (Math.random() - 0.5) * 250;
+                const ty = (Math.random() - 0.5) * 250;
+                heart.style.setProperty('--tx', `${tx}px`);
+                heart.style.setProperty('--ty', `${ty}px`);
+
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 1000);
+            }
+        });
+
+        // Hediye kutusunu açma ve müziği başlatma
+        function openGift(e) {
+            e.stopPropagation(); 
+            const giftBox = document.getElementById('giftBox');
+            const mainTitle = document.getElementById('mainTitle');
+            const letterCard = document.getElementById('letterCard');
+            const music = document.getElementById('bgMusic');
+
+            giftBox.style.display = 'none';
+            mainTitle.style.display = 'block';
+            letterCard.style.display = 'block';
+
+            // Şarkıyı başlat
+            music.play().catch(error => {
+                console.log("Müzik otomatik başlatılamadı, tarayıcı engelledi:", error);
+            });
+        }
+    </script>
+</body>
+</html>
